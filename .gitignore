@@ -1,0 +1,6 @@
+build/ios-*
+build/osx
+cmake-build-debug
+.idea
+deps/duktape
+SDKs/*.sdk
