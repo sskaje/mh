@@ -65,7 +65,6 @@ Command                                 Description
  close                                   Close current task
  search-hex HEX                          Search HEX bytes, like search-hex 1a2b3c4d
  search-string STRING                    Search string, like search-string hello
- rescan                                  Redo search to filter results
  memory-read ADDRESS SIZE                Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
  memory-write ADDRESS HEXSTR             Write memory data at ADDRESS, both ADDRESS and HEXSTR are in HEX
  update-memory-read ADDRESS SIZE         Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
@@ -92,7 +91,6 @@ Example:
 
 ## Known issues
 
-* CLI mode does not support "var with spaces"
 
 
 ## License
