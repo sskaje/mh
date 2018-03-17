@@ -209,10 +209,12 @@ int main(int argc, char **argv) {
 
             cmd_memory_write(context, address, (void *) bytes, (mach_msg_type_number_t) sizeof(bytes));
 
-#if JAVASCRIPT_SUPPORT
             } else if (!strncmp(av[0], "script-run", 10)) {
+#if JAVASCRIPT_SUPPORT
             MIN_ARGC_REQUIRED(2)
             cmd_script_run(context, av[1]);
+#else
+            printf("JAVASCRIPT not supported. Please run duktape_prepare.sh\n");
 #endif //JAVASCRIPT_SUPPORT
 
         } else if (!strncmp(av[0], "bytes2hex", 8)) {
