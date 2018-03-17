@@ -95,7 +95,7 @@ void prepareLineedit()
         }
 
 int main(int argc, char **argv) {
-#ifdef IOS_JAILBREAK_ELECTRA
+#if IOS_JAILBREAK_ELECTRA
     patch_setuidandplatformize();
 #endif
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
         exit(-1);
     }
 
-#ifdef IOS_JAILBREAK_ELECTRA
+#if IOS_JAILBREAK_ELECTRA
     setuid(0);
     setgid(0);
 #endif

@@ -34,7 +34,7 @@
 
 
 
-#ifdef IOS_JAILBREAK_ELECTRA
+#if IOS_JAILBREAK_ELECTRA
 
 void patch_setuidandplatformize();
 
