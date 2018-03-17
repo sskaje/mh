@@ -72,9 +72,9 @@ int cmd_update_search_bytes(MHContext *context, char *needle, size_t needle_leng
 
 int cmd_search_bytes(MHContext *context, char *needle, size_t needle_length);
 
-
+#if JAVASCRIPT_SUPPORT
 int cmd_script_run(MHContext *context, char *filename);
-
+#endif //JAVASCRIPT_SUPPORT
 
 #endif //MH_COMMANDS_H
 

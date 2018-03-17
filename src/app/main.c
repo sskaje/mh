@@ -208,9 +208,13 @@ int main(int argc, char **argv) {
             mh_dump_hex((void *) bytes, strlen(av[2]) / 2, 0);
 
             cmd_memory_write(context, address, (void *) bytes, (mach_msg_type_number_t) sizeof(bytes));
-        } else if (!strncmp(av[0], "script-run", 10)) {
+
+#if JAVASCRIPT_SUPPORT
+            } else if (!strncmp(av[0], "script-run", 10)) {
             MIN_ARGC_REQUIRED(2)
             cmd_script_run(context, av[1]);
+#endif //JAVASCRIPT_SUPPORT
+
         } else if (!strncmp(av[0], "bytes2hex", 8)) {
             MIN_ARGC_REQUIRED(2)
             cmd_utils_bytes2hex(av[1], strlen(av[1]));

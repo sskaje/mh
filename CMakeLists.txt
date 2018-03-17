@@ -84,6 +84,8 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/deps/duktape/duktape.c)
         ${CMAKE_SOURCE_DIR}/src/app/scripts.c
         ${CMAKE_SOURCE_DIR}/src/app/commands/script.c
         )
+
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DJAVASCRIPT_SUPPORT=1")
 endif()
 
 set(LIBRARY_FILES

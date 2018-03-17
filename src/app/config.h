@@ -34,11 +34,20 @@
 
 #define LINE_MAX_ARGC 16
 
-//
-// Must be multiples of page size, e.g 4096 * 16
-//
-//
+/**
+ * Must be multiples of page size, e.g 4096 * 16
+ */
 #define MAX_READ_MEMORY_SIZE 0
+
+
+#ifndef JAVASCRIPT_SUPPORT
+#define JAVASCRIPT_SUPPORT 0
+#endif //JAVASCRIPT_SUPPORT
+
+
+#ifndef IOS_JAILBREAK_ELECTRA
+#define IOS_JAILBREAK_ELECTRA 0
+#endif //IOS_JAILBREAK_ELECTRA
 
 
 #endif //MH_CONFIG_H
