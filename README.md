@@ -66,7 +66,8 @@ Command                                 Description
  search-hex HEX                          Search HEX bytes, like search-hex 1a2b3c4d
  search-string STRING                    Search string, like search-string hello
  memory-read ADDRESS SIZE                Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
- memory-write ADDRESS HEXSTR             Write memory data at ADDRESS, both ADDRESS and HEXSTR are in HEX
+ memory-write ADDRESS STR                Write data to ADDRESS, ADDRESS in HEX, STR in BYTES
+ memory-write-hex ADDRESS HEXSTR         Write hex data to ADDRESS, both ADDRESS and HEXSTR are in HEX
  update-memory-read ADDRESS SIZE         Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
  update-memory-write ADDRESS HEXSTR      Write memory data at ADDRESS, both ADDRESS and HEXSTR are in HEX
  result                                  Print result list, last round by default
@@ -79,6 +80,7 @@ Command                                 Description
  int2hex INTEGER                         Integer to hex
  clear                                   Clear screen
  help                                    Print this message
+ 
  ```
 
 ### JavaScript API
