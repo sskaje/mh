@@ -110,3 +110,29 @@ function mh_result_free()
 {
     return true;
 }
+
+/**
+ * Native function for int64 add
+ *
+ * @param str_a
+ * @param str_b
+ * @returns {*}
+ */
+function mh_integer_add(str_a, str_b)
+{
+    return "str_a + str_b";
+}
+
+/**
+ * Native function for int64 sub
+ *
+ * @param str_a
+ * @param str_b
+ * @returns {*}
+ */
+function mh_integer_sub(str_a, str_b)
+{
+    return "str_a - str_b";
+}
+
+
