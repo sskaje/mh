@@ -118,4 +118,20 @@ mach_vm_address_t duk_require_address(duk_context *ctx, duk_idx_t idx)
     return (mach_vm_address_t) strtoll(addr, NULL, 16);
 }
 
+/**
+ * Convert hex string to uint64_t
+ * Used in script functions
+ *
+ * @param ctx
+ * @param idx
+ * @return
+ */
+int64_t duk_require_int64(duk_context *ctx, duk_idx_t idx)
+{
+    size_t size;
+    const char *addr = duk_require_lstring(ctx, idx, &size);
+    return (int64_t) strtoll(addr, NULL, 16);
+}
+
+
 // EOF

@@ -150,6 +150,7 @@ static duk_ret_t native_result_free(duk_context *ctx)
     MHContext *mh = MHGetGlobalContext();
 
     mh_result_free(&mh->results);
+    result_ptr = NULL;
 
     duk_push_true(ctx);
 

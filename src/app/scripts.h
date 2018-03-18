@@ -43,6 +43,7 @@ void script_free(duk_context *ctx);
 void script_load(duk_context *ctx, const char *filename);
 
 mach_vm_address_t duk_require_address(duk_context *ctx, duk_idx_t idx);
+int64_t duk_require_int64(duk_context *ctx, duk_idx_t idx);
 
 
 #endif //MH_SCRIPTS_H

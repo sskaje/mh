@@ -31,8 +31,43 @@
 
 #include "../scripts.h"
 
+duk_ret_t native_integer_add(duk_context *ctx)
+{
+    // todo: 32bit cpu ?
+    // 0x0123456789abcdef
+    char tmp_address[20] = {0};
+
+    int64_t a = duk_require_int64(ctx, 0);
+    int64_t b = duk_require_int64(ctx, 1);
+
+    sprintf(tmp_address, "0x%llx", a + b);
+    duk_push_string(ctx, tmp_address);
+
+    return 1;
+}
+
+duk_ret_t native_integer_subtract(duk_context *ctx)
+{
+    // todo: 32bit cpu ?
+    // 0x0123456789abcdef
+    char tmp_address[20] = {0};
+
+    int64_t a = duk_require_int64(ctx, 0);
+    int64_t b = duk_require_int64(ctx, 1);
+
+    sprintf(tmp_address, "0x%llx", a - b);
+    duk_push_string(ctx, tmp_address);
+
+    return 1;
+}
+
 void script_utils_register(duk_context *ctx)
 {
+    duk_push_c_function(ctx, native_integer_add, 2);
+    duk_put_prop_string(ctx, -2, "mh_integer_add");
+
+    duk_push_c_function(ctx, native_integer_subtract, 2);
+    duk_put_prop_string(ctx, -2, "mh_integer_sub");
 
 }
 
