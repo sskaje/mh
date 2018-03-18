@@ -41,7 +41,7 @@ char *cmds[] = {
         "update-search-string", "update-search-hex",
         "result",
 
-        "memory-read", "memory-write",
+        "memory-read", "memory-write", "memory-write-hex",
 
         "script-run",
 
@@ -204,17 +204,29 @@ int main(int argc, char **argv) {
 
             // memory-write ADDRESS HEX-STRING
             mach_vm_address_t address = (mach_vm_address_t) strtoull(av[1], NULL, 16);
+            mh_dump_hex((void *) av[2], strlen(av[2]), 0);
+
+            cmd_memory_write(context, address, (void *) av[2], (mach_msg_type_number_t) strlen(av[2]));
+
+        } else if (!strncmp(av[0], "memory-write-hex", 16)) {
+            MIN_ARGC_REQUIRED(3)
+
+            // memory-write ADDRESS HEX-STRING
+            mach_vm_address_t address = (mach_vm_address_t) strtoull(av[1], NULL, 16);
             const char        *bytes  = (const char *) mh_hex2bytes(av[2], strlen(av[2]));
             mh_dump_hex((void *) bytes, strlen(av[2]) / 2, 0);
 
-            cmd_memory_write(context, address, (void *) bytes, (mach_msg_type_number_t) sizeof(bytes));
+            size_t bsize  = strlen(av[2]) / 2;
+//            size_t bsize  = sizeof(bytes);
+
+            cmd_memory_write(context, address, (void *) bytes, (mach_msg_type_number_t) bsize);
 
             } else if (!strncmp(av[0], "script-run", 10)) {
 #if JAVASCRIPT_SUPPORT
             MIN_ARGC_REQUIRED(2)
             cmd_script_run(context, av[1]);
 #else
-            printf("JAVASCRIPT not supported. Please run duktape_prepare.sh\n");
+            printf("JAVASCRIPT not supported. Please run duktape_prepare.sh under tools.\n");
 #endif //JAVASCRIPT_SUPPORT
 
         } else if (!strncmp(av[0], "bytes2hex", 8)) {
