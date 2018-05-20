@@ -1,11 +1,12 @@
 # MH
-A Memory Editor for iOS/maxOS with JavaScript support
+
+A Memory Editor for iOS/macOS with Javascript support
 
 ## Requirement
 
 * macOS
 * Xcode
-* jailbroken iDevice if you want to try iOS versions
+* Jailbroken iDevice if you want to try iOS versions
 * [linenoise](https://github.com/antirez/linenoise.git) for interactive cli tool
 * [duktape](https://github.com/svaarala/duktape) for JavaScript support
 
@@ -29,13 +30,8 @@ $ bash tools/duktape_prepare.sh
 ```bash
 # Build for OSX
 $ bash build/build-osx.sh
-# Build for ARMv7 iDevices
-$ bash build/build-ios-armv7.sh
-# Build for ARMv7s iDevices
-$ bash build/build-ios-armv7s.sh
-# Build for ARM64 iDevices (iOS 11.x by Electra)
-$ bash build/build-ios-armv64.sh
-
+# Build for iDevices, universal binary
+$ bash build-ios.sh
 ```
 
 ### Run
@@ -44,9 +40,9 @@ $ bash build/build-ios-armv64.sh
 $ sudo ./mh_cli
 ```
 
-For iOS 11.x by Electra, binary must locates /bin/mh_cli
+For iOS 11.x by Electra, binary must locates `/bin/mh_cli`.
 
-Read more: [Run HelloWorld on Jailbroken iOS 11](https://sskaje.me/2018/03/run-helloworld-on-jailbroken-ios-11/)
+More: [Run HelloWorld on Jailbroken iOS 11](https://sskaje.me/2018/03/run-helloworld-on-jailbroken-ios-11/)
 
 
 ## Documentation
@@ -79,7 +75,7 @@ Command                                 Description
  
  ```
 
-### JavaScript API
+### Javascript API
 
 See [docs/define.js](https://github.com/sskaje/mh/blob/master/docs/define.js)
 
@@ -93,11 +89,8 @@ Example:
 
 ## License
 
-[MH: MIT](https://github.com/sskaje/mh/blob/master/LICENSE)
+MH is available under the MIT license. See the LICENSE file for more info.
 
-[linenoise](https://github.com/antirez/linenoise/blob/master/LICENSE)
-
-[duktape](https://github.com/svaarala/duktape/blob/master/LICENSE.txt)
-
-[Cydia](https://github.com/ElectraJailbreak/cydia/blob/master/COPYING) if you're using mh for iOS 11 jailbroken by Electra.
+- [linenoise](https://github.com/antirez/linenoise/blob/master/LICENSE)
+- [duktape](https://github.com/svaarala/duktape/blob/master/LICENSE.txt)
 
