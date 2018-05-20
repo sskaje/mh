@@ -1,6 +1,7 @@
 # MH
 
-MH: Memory Hacker v0.1-1
+MH: Memory Hacker
+
 A memory editor for iOS/macOS with JavaScript support.
 
 ## Requirement
