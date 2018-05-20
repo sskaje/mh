@@ -1,6 +1,6 @@
 # MH
 
-A Memory Editor for iOS/macOS with Javascript support
+A memory editor for iOS/macOS with Javascript support.
 
 ## Requirement
 
