@@ -33,7 +33,7 @@
 void cmd_help()
 {
     printf(
-            "=== Memory Hacker ===\n"
+            "MH: Memory Hacker v0.1-1\n"
             "Author: sskaje\n\n"
             "Command                                 Description\n"
             " process-list                            Print process list\n"

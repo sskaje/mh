@@ -1,6 +1,7 @@
 # MH
 
-A memory editor for iOS/macOS with Javascript support.
+MH: Memory Hacker v0.1-1
+A memory editor for iOS/macOS with JavaScript support.
 
 ## Requirement
 
@@ -20,15 +21,16 @@ $ git clone https://github.com/sskaje/mh.git
 $ cd mh
 # prepare linenoise
 $ git submodule update --init --recursive
-# prepare iPhoneOS SDKs
+# prepare sdks, or copy from Xcode
 $ bash tools/download_sdks.sh
 # prepare duktape
 $ bash tools/duktape_prepare.sh
 ```
 
 ### Build
+
 ```bash
-# Build for OSX
+# Build for macOS
 $ bash build/build-osx.sh
 # Build for iDevices, universal binary
 $ bash build-ios.sh
@@ -75,7 +77,7 @@ Command                                 Description
  
  ```
 
-### Javascript API
+### JavaScript API
 
 See [docs/define.js](https://github.com/sskaje/mh/blob/master/docs/define.js)
 
