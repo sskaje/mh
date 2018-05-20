@@ -1,1 +1,1 @@
-/usr/local/Cellar/libedit/20170329-3.1/include/histedit.h
+/usr/include/histedit.h
