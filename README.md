@@ -1,9 +1,9 @@
 # MH
-A Memory Editor for iOS/OSX with JavaScript support
+A Memory Editor for iOS/maxOS with JavaScript support
 
 ## Requirement
 
-* mac OS / Mac OSX
+* macOS
 * Xcode
 * jailbroken iDevice if you want to try iOS versions
 * [linenoise](https://github.com/antirez/linenoise.git) for interactive cli tool
@@ -15,13 +15,13 @@ A Memory Editor for iOS/OSX with JavaScript support
 ### Prepare
 
 ```bash
-$ git clone https://github.com/sskaje/mh
+$ git clone https://github.com/sskaje/mh.git
 $ cd mh
 # prepare linenoise
 $ git submodule update --init --recursive
 # prepare iPhoneOS SDKs
 $ bash tools/download_sdks.sh
-# Prepare duktape
+# prepare duktape
 $ bash tools/duktape_prepare.sh
 ```
 
@@ -33,10 +33,8 @@ $ bash build/build-osx.sh
 $ bash build/build-ios-armv7.sh
 # Build for ARMv7s iDevices
 $ bash build/build-ios-armv7s.sh
-# Build for ARM64 iDevices, iOS 10.2
+# Build for ARM64 iDevices (iOS 11.x by Electra)
 $ bash build/build-ios-armv64.sh
-# Build for ARM64 iDevices, iOS 11.x by Electra
-$ bash build/build-ios-armv64-electra.sh
 
 ```
 
@@ -63,18 +61,16 @@ Command                                 Description
  process-list                            Print process list
  open PID                                Open a task
  close                                   Close current task
- search-hex HEX                          Search HEX bytes, like search-hex 1a2b3c4d
- search-string STRING                    Search string, like search-string hello
+ [update-]search-hex HEX                 Search HEX bytes, like search-hex 1a2b3c4d
+ [update-]search-string STR              Search string, like search-string hello
  memory-read ADDRESS SIZE                Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
  memory-write ADDRESS STR                Write data to ADDRESS, ADDRESS in HEX, STR in BYTES
- memory-write-hex ADDRESS HEXSTR         Write hex data to ADDRESS, both ADDRESS and HEXSTR are in HEX
- update-memory-read ADDRESS SIZE         Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
- update-memory-write ADDRESS HEXSTR      Write memory data at ADDRESS, both ADDRESS and HEXSTR are in HEX
+ memory-write-hex ADDRESS HEX            Write hex data to ADDRESS, both ADDRESS and HEXSTR are in HEX
  result                                  Print result list, last round by default
  dyld                                    Print dyld info
  vm-region                               Print mach_vm_region()
- bytes2hex STRING                        Bytes to hex string
- hex2bytes HEXSTR                        Hex string to bytes
+ bytes2hex STR                           Bytes to hex string
+ hex2bytes HEX                           Hex string to bytes
  float2hex FLOAT                         Float number to hex
  double2hex DOUBLE                       Double number to hex
  int2hex INTEGER                         Integer to hex

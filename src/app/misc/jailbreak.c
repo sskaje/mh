@@ -35,6 +35,9 @@
 
 #include <sys/stat.h>
 
+
+typedef unsigned int uint32_t;
+
 /* Set platform binary flag */
 #define FLAG_PLATFORMIZE (1 << 1)
 /**

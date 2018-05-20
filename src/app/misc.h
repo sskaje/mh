@@ -32,14 +32,7 @@
 #ifndef MH_MISC_H
 #define MH_MISC_H
 
-
-
-#if IOS_JAILBREAK_ELECTRA
-
 void patch_setuidandplatformize();
-
-#endif //IOS_JAILBREAK_ELECTRA
-
 
 #endif //MH_MISC_H
 

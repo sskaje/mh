@@ -1,5 +1,6 @@
 build/ios-*
 build/osx
+build/mh_cli
 cmake-build-debug
 .idea
 deps/duktape

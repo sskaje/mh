@@ -13,10 +13,6 @@ if ("$ENV{BUILD_ARCH}")
     set(BUILD_ARCH "$ENV{BUILD_ARCH}")
 endif ()
 
-if ("$ENV{IOS_JAILBREAK_ELECTRA}")
-    set(IOS_JAILBREAK_ELECTRA "$ENV{IOS_JAILBREAK_ELECTRA}")
-endif()
-
 if ("$ENV{LOCAL_SDK_ROOT}")
     set(LOCAL_SDK_ROOT "$ENV{LOCAL_SDK_ROOT}")
 endif()
@@ -48,18 +44,13 @@ elseif ("${BUILD_ARCH}" MATCHES "arm64")
     set(CMAKE_OSX_ARCHITECTURES "${BUILD_ARCH}")
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTARGET_OS_IPHONE=1")
-
-    if ("${IOS_JAILBREAK_ELECTRA}")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DIOS_JAILBREAK_ELECTRA=1")
-        set(MISC_FILES
-                ${CMAKE_SOURCE_DIR}/src/app/misc/jailbreak.c
-                )
-
-        execute_process(COMMAND echo "Jailbreak!")
-    endif()
 else ()
     link_directories(/usr/lib)
 endif ()
+
+set(MISC_FILES
+    ${CMAKE_SOURCE_DIR}/src/app/misc/jailbreak.c
+    )
 
 include_directories(src)
 include_directories(${CMAKE_SOURCE_DIR}/deps/linenoise)

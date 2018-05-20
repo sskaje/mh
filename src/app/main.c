@@ -95,19 +95,18 @@ void prepareLineedit()
         }
 
 int main(int argc, char **argv) {
-#if IOS_JAILBREAK_ELECTRA
-    patch_setuidandplatformize();
-#endif
 
     if (getuid() != 0) {
-        printf("Please run as 'root'\n");
-        exit(-1);
+        patch_setuidandplatformize(); // Electra
+        if (getuid() != 0) {
+            printf("Please run as 'root'\n");
+            exit(-1);
+        }
+        {
+            setuid(0);
+            setgid(0);
+        }
     }
-
-#if IOS_JAILBREAK_ELECTRA
-    setuid(0);
-    setgid(0);
-#endif
 
     char *input, shell_prompt[64];
 

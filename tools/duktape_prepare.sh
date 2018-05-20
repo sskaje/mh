@@ -13,11 +13,11 @@ echo "Building..."
 cd duktape-${VERSION}
 rm -rf src-custom
 
-python tools/configure.py \
-      --source-directory src-input \
-      --output-directory src-custom \
-      --config-metadata config \
-      -DDUK_USE_FASTINT
+python2 tools/configure.py \
+       --source-directory src-input \
+       --output-directory src-custom \
+       --config-metadata config \
+       -DDUK_USE_FASTINT
 
 mkdir -p $DEP_DIR
 cp src-custom/* $DEP_DIR
