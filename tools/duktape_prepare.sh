@@ -4,9 +4,9 @@ DEP_DIR=$(dirname $(dirname $(realpath $0)))/deps/duktape
 
 WORK_DIR=duktape-tmp-checkout
 
-VERSION=2.2.0
+VERSION=2.3.0
 
-echo "Downloading..."
+echo "Downloading https://github.com/svaarala/duktape/releases/download/v${VERSION}/duktape-${VERSION}.tar.xz ..."
 curl --silent -L https://github.com/svaarala/duktape/releases/download/v${VERSION}/duktape-${VERSION}.tar.xz | tar x
 
 echo "Building..."
