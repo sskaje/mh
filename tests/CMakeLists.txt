@@ -11,13 +11,6 @@ add_executable(test-argv test-argv.c
         ${DEPENDENCY_FILES}
         ${CMAKE_SOURCE_DIR}/src/app/args.c)
 
-add_executable(test-readline test-readline.c)
-target_link_libraries(test-readline edit)
-# target_link_libraries(test-readline readline)
-
-add_executable(test-editline test-editline.c)
-target_link_libraries(test-editline edit)
-
 include_directories(${CMAKE_SOURCE_DIR}/deps/linenoise)
 
 add_executable(test-linenoise-app test-linenoise-app.c ${LINENOISE_FILES} ${LIBRARY_FILES})
