@@ -199,15 +199,6 @@ int main(int argc, char **argv) {
             mach_vm_size_t    size    = (mach_vm_size_t) strtoull(av[2], NULL, 16);
 
             cmd_memory_read(context, address, size);
-        } else if (!strncmp(av[0], "memory-write", 12)) {
-            MIN_ARGC_REQUIRED(3)
-
-            // memory-write ADDRESS HEX-STRING
-            mach_vm_address_t address = (mach_vm_address_t) strtoull(av[1], NULL, 16);
-            mh_dump_hex((void *) av[2], strlen(av[2]), 0);
-
-            cmd_memory_write(context, address, (void *) av[2], (mach_msg_type_number_t) strlen(av[2]));
-
         } else if (!strncmp(av[0], "memory-write-hex", 16)) {
             MIN_ARGC_REQUIRED(3)
 
@@ -221,7 +212,16 @@ int main(int argc, char **argv) {
 
             cmd_memory_write(context, address, (void *) bytes, (mach_msg_type_number_t) bsize);
 
-            } else if (!strncmp(av[0], "script-run", 10)) {
+        } else if (!strncmp(av[0], "memory-write", 12)) {
+            MIN_ARGC_REQUIRED(3)
+
+            // memory-write ADDRESS HEX-STRING
+            mach_vm_address_t address = (mach_vm_address_t) strtoull(av[1], NULL, 16);
+            mh_dump_hex((void *) av[2], strlen(av[2]), 0);
+
+            cmd_memory_write(context, address, (void *) av[2], (mach_msg_type_number_t) strlen(av[2]));
+
+        } else if (!strncmp(av[0], "script-run", 10)) {
 #if JAVASCRIPT_SUPPORT
             MIN_ARGC_REQUIRED(2)
             cmd_script_run(context, av[1]);
