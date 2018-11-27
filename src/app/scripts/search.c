@@ -33,12 +33,13 @@
 
 #include <app/app.h>
 #include "../scripts.h"
+#include "script-common.h"
 
 static duk_ret_t native_search(duk_context *ctx)
 {
     const char *buf    = duk_require_string(ctx, 0);
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     cmd_search_bytes(mh, (char *)buf, strlen(buf));
 
@@ -51,7 +52,7 @@ static duk_ret_t native_search_update(duk_context *ctx)
 {
     const char *buf    = duk_require_string(ctx, 0);
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     cmd_update_search_bytes(mh, (char *)buf, strlen(buf));
 

@@ -33,6 +33,7 @@
 
 #include <app/app.h>
 #include "../scripts.h"
+#include "script-common.h"
 
 /**
  * memory write api
@@ -47,7 +48,7 @@ static duk_ret_t native_memory_write(duk_context *ctx)
 
     char *raw = (char *) mh_hex2bytes(buf, strlen(buf));
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
     mh_write_memory(&mh->process, address, raw, strlen(buf) / 2);
 
     duk_push_true(ctx);
@@ -64,7 +65,7 @@ static duk_ret_t native_memory_read(duk_context *ctx)
     mach_vm_address_t address = duk_require_address(ctx, 0);
     mach_vm_size_t    size    = duk_require_uint(ctx, 1);
 
-    MHContext *mh     = MHGetGlobalContext();
+    MHContext *mh     = script_get_global_mh_context();
     void      *buffer = mh_read_memory(&mh->process, address, &size);
 
     // return hex ?
@@ -85,7 +86,7 @@ static duk_ret_t native_memory_dump(duk_context *ctx)
     mach_vm_address_t address = duk_require_address(ctx, 0);
     mach_vm_size_t    size    = duk_require_uint(ctx, 1);
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     mh_dump_memory(&mh->process, address, size);
 

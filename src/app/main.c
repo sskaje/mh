@@ -68,19 +68,6 @@ void completion(const char *buf, linenoiseCompletions *lc)
     }
 }
 
-static MHContext *mh_global_context = NULL;
-
-int MHSaveGlobalContext(MHContext *context)
-{
-    mh_global_context = context;
-    return 0;
-}
-
-MHContext *MHGetGlobalContext()
-{
-    return mh_global_context;
-}
-
 void prepareLineedit()
 {
     linenoiseSetCompletionCallback(completion);
@@ -100,7 +87,8 @@ int main(int argc, char **argv) {
 #endif
 
     if (getuid() != 0) {
-        printf("Please run as 'root'\n");
+        printf("Error: Please run as 'root'\n\n");
+	    cmd_help();
         exit(-1);
     }
 
@@ -122,6 +110,11 @@ int main(int argc, char **argv) {
     MHSaveGlobalContext(context);
 
     if (argc > 1) {
+        if (strlen(argv[1]) > 0 && argv[1][0] == '-') {
+            cmd_help();
+            return -2;
+        }
+
         cmd_open(context, atoi(argv[1]));
     }
 
@@ -156,6 +149,7 @@ int main(int argc, char **argv) {
             cmd_process_list(context);
         } else if (!strncmp(av[0], "open", 4)) {
             // open PID
+            MIN_ARGC_REQUIRED(2)
             cmd_open(context, atoi(av[1]));
         } else if (!strncmp(av[0], "close", 5)) {
             cmd_close(context);

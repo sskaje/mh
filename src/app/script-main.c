@@ -1,5 +1,5 @@
 /**
- * src/app/context.c -- mh_cli app context functions
+ * src/app/script-main.c -- mh_script main file
  *
  * @author sskaje
  * @license MIT
@@ -28,44 +28,39 @@
  * ------------------------------------------------------------------------
  */
 
+
 #include "app.h"
 
-MHContext *MH_new()
-{
-    MHContext *context = malloc(sizeof(MHContext));
-    context->process_id   = 0;
-    context->result_count = 0;
-    context->query_size   = 16;
-    context->result_ptr   = NULL;
 
-    mh_result_init(&context->results);
-
-    return context;
-}
-
-int MH_free(MHContext *context)
-{
-    if (context->result_count) {
-        mh_result_free(&context->results);
-
-        context->result_count = 0;
-        context->query_size   = 16;
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        printf("Usage: %s SCRIPT_FILE [EXTRA ARGS]\n", argv[0]);
+        exit(-2);
     }
 
-    free(context);
+#if IOS_JAILBREAK_ELECTRA
+    patch_setuidandplatformize();
+#endif
+
+    if (getuid() != 0) {
+        printf("Error: Please run as 'root'\n\n");
+        printf("Usage: %s SCRIPT_FILE [EXTRA ARGS]\n", argv[0]);
+        exit(-1);
+    }
+
+#if IOS_JAILBREAK_ELECTRA
+    setuid(0);
+    setgid(0);
+#endif
+
+#if JAVASCRIPT_SUPPORT
+    // todo: push args to js
+    cmd_script_run(NULL, argv[1]);
+#else
+    printf("JAVASCRIPT not supported. Please run duktape_prepare.sh under tools.\n");
+#endif //JAVASCRIPT_SUPPORT
 
     return 0;
-}
-
-int MHSaveGlobalContext(MHContext *context)
-{
-    mh_global_context = context;
-    return 0;
-}
-
-MHContext *MHGetGlobalContext()
-{
-    return mh_global_context;
 }
 
 // EOF

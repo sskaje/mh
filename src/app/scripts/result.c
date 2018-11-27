@@ -37,8 +37,7 @@
 #include <app/app.h>
 #include <mh/mh.h>
 #include "../scripts.h"
-
-static struct result_entry * result_ptr;
+#include "script-common.h"
 
 /**
  * Get result count from context
@@ -48,7 +47,7 @@ static struct result_entry * result_ptr;
  */
 static duk_ret_t native_result_count(duk_context *ctx)
 {
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     // push result count to stack
     duk_push_uint(ctx, (duk_uint_t) mh->result_count);
@@ -64,9 +63,9 @@ static duk_ret_t native_result_count(duk_context *ctx)
  */
 static duk_ret_t native_result_reset(duk_context *ctx)
 {
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
-    result_ptr = STAILQ_FIRST(&mh->results);
+    mh->result_ptr = STAILQ_FIRST(&mh->results);
 
     duk_push_true(ctx);
 
@@ -83,14 +82,13 @@ static duk_ret_t native_result_get(duk_context *ctx)
 {
     // get first result
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
-    if (result_ptr == NULL) {
-        result_ptr = STAILQ_FIRST(&mh->results);
+    if (mh->result_ptr == NULL) {
+        mh->result_ptr = STAILQ_FIRST(&mh->results);
     }
 
     // push result
-//    (struct result_entry *) result_ptr;
     duk_idx_t arr_idx;
 
     // 0x0123456789abcdef
@@ -98,15 +96,15 @@ static duk_ret_t native_result_get(duk_context *ctx)
 
     arr_idx = duk_push_array(ctx);
 
-    sprintf(tmp_address, "0x%llx", result_ptr->address);
+    sprintf(tmp_address, "0x%llx", mh->result_ptr->address);
     duk_push_string(ctx, tmp_address);
     duk_put_prop_index(ctx, arr_idx, 0);
 
-    sprintf(tmp_address, "0x%llx", result_ptr->region_address);
+    sprintf(tmp_address, "0x%llx", mh->result_ptr->region_address);
     duk_push_string(ctx, tmp_address);
     duk_put_prop_index(ctx, arr_idx, 1);
 
-    duk_push_uint(ctx, result_ptr->region_size);
+    duk_push_uint(ctx, mh->result_ptr->region_size);
     duk_put_prop_index(ctx, arr_idx, 2);
 
 
@@ -121,16 +119,16 @@ static duk_ret_t native_result_get(duk_context *ctx)
  */
 static duk_ret_t native_result_next(duk_context *ctx)
 {
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
-    if (result_ptr == NULL) {
-        result_ptr = STAILQ_FIRST(&mh->results);
+    if (mh->result_ptr == NULL) {
+        mh->result_ptr = STAILQ_FIRST(&mh->results);
     } else {
-        result_ptr = STAILQ_NEXT(result_ptr, next);
+        mh->result_ptr = STAILQ_NEXT(mh->result_ptr, next);
     }
 
     // push true if element exists
-    if (result_ptr != NULL) {
+    if (mh->result_ptr != NULL) {
         duk_push_true(ctx);
     } else {
         duk_push_false(ctx);
@@ -147,10 +145,10 @@ static duk_ret_t native_result_next(duk_context *ctx)
  */
 static duk_ret_t native_result_free(duk_context *ctx)
 {
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     mh_result_free(&mh->results);
-    result_ptr = NULL;
+    mh->result_ptr = NULL;
 
     duk_push_true(ctx);
 
@@ -167,11 +165,11 @@ static duk_ret_t native_result_remove(duk_context *ctx)
 {
     mach_vm_address_t address = duk_require_address(ctx, 0);
 
-    MHContext *mh = MHGetGlobalContext();
+    MHContext *mh = script_get_global_mh_context();
 
     // move to first if current ptr will be removed
-    if (result_ptr->address == address) {
-        result_ptr = STAILQ_FIRST(&mh->results);
+    if (mh->result_ptr->address == address) {
+        mh->result_ptr = STAILQ_FIRST(&mh->results);
     }
     // remove
     if (mh_result_remove_by_address(&mh->results, address)) {

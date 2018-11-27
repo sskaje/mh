@@ -1,18 +1,23 @@
-function test() {
+
+function test(pid) {
+    var mh1 = new MH();
+    mh1.open(pid);
+
+    console.log("PID=" + mh1.get_pid());
 
     var addr = "0x0000000083ef9fe7";
     var size = 0x10;
 
     console.log("test memory dump");
 
-    mh_memory_dump(addr, size);
+    mh1.memory_dump(addr, size);
 
     // console.log("test memory write");
-    // mh_memory_write(addr, "aaabbbccc");
+    // mh1.memory_write(addr, "aaabbbccc");
 
     var x;
 
-    x = mh_memory_read(addr, size);
+    x = mh1.memory_read(addr, size);
     console.log(x);
 
     /*
@@ -23,24 +28,28 @@ function test() {
     */
 
     // console.log("test memory write");
-    // mh_memory_write(addr, Duktape.enc('hex', "Hi mmm"));
+    // mh1.memory_write(addr, Duktape.enc('hex', "Hi mmm"));
 
-    // x = mh_memory_read(addr, size);
+    // x = mh1.memory_read(addr, size);
     // console.log(x);
 
 
     console.log("search 'Hello, world!'");
-    var result_count = mh_search("Hello, world!");
+    var result_count = mh1.search("Hello, world!");
 
     console.log("result count: " + result_count);
 
-    while (mh_result_next()) {
-        var result = mh_result_get();
+    while (mh1.result_next()) {
+        var result = mh1.result_get();
         console.log(result);
 
-        mh_memory_dump(result[0], 0x20);
+        mh1.memory_dump(result[0], 0x20);
     }
+
+
+    mh1.close();
+
 }
 
-test();
+test(20655);
 

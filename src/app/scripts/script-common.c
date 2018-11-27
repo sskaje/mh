@@ -1,5 +1,5 @@
 /**
- * src/app/context.c -- mh_cli app context functions
+ * src/app/scripts/script-common.c -- JavaScript API private source
  *
  * @author sskaje
  * @license MIT
@@ -28,44 +28,33 @@
  * ------------------------------------------------------------------------
  */
 
-#include "app.h"
+#include "script-common.h"
 
-MHContext *MH_new()
+/**
+ * get MHContext* from global static
+ *
+ * @return
+ */
+MHContext * script_get_global_mh_context()
 {
-    MHContext *context = malloc(sizeof(MHContext));
-    context->process_id   = 0;
-    context->result_count = 0;
-    context->query_size   = 16;
-    context->result_ptr   = NULL;
+    MHContext * mh =  MHGetGlobalContext();
 
-    mh_result_init(&context->results);
-
-    return context;
-}
-
-int MH_free(MHContext *context)
-{
-    if (context->result_count) {
-        mh_result_free(&context->results);
-
-        context->result_count = 0;
-        context->query_size   = 16;
+    if (mh == NULL) {
+        printf("Global context not initialized, please use this script from mh_cli\n");
+        exit(-199);
     }
 
-    free(context);
-
-    return 0;
+    return mh;
 }
 
-int MHSaveGlobalContext(MHContext *context)
+/**
+ * get MHContext* from duk_context*
+ *
+ */
+MHContext * script_get_object_mh_context(duk_context *ctx)
 {
-    mh_global_context = context;
-    return 0;
+    duk_push_this(ctx);
+    duk_get_prop_string(ctx, -1, DUK_HIDDEN_SYMBOL(MHOBJ_HIDDEN_SYMBOL_CONTEXT));
+    MHContext *mh = duk_get_pointer(ctx, -1);
+    return mh;
 }
-
-MHContext *MHGetGlobalContext()
-{
-    return mh_global_context;
-}
-
-// EOF

@@ -39,7 +39,8 @@
     SCRIPT_REGISTER(utils)     \
     SCRIPT_REGISTER(memory)    \
     SCRIPT_REGISTER(result)    \
-    SCRIPT_REGISTER(search)
+    SCRIPT_REGISTER(search)    \
+    SCRIPT_REGISTER(object)
 
 void script_utils_register(duk_context *ctx);
 
@@ -48,6 +49,10 @@ void script_memory_register(duk_context *ctx);
 void script_result_register(duk_context *ctx);
 
 void script_search_register(duk_context *ctx);
+
+void script_object_register(duk_context *ctx);
+
+
 /*
 The function can return one of the following:
 

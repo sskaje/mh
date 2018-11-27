@@ -95,6 +95,7 @@ set(LIBRARY_FILES
         ${CMAKE_SOURCE_DIR}/src/mh/result.c
         )
 
+
 #set(DEPENDENCY_FILES)
 
 set(APP_FILES
@@ -114,18 +115,27 @@ set(APP_FILES
         ${MISC_FILES}
 
         ${SCRIPT_FILES}
-
-        ${CMAKE_SOURCE_DIR}/src/app/args.c
-        ${CMAKE_SOURCE_DIR}/src/app/main.c
         )
 
 add_executable(mh_cli
+        ${CMAKE_SOURCE_DIR}/src/app/args.c
+        ${CMAKE_SOURCE_DIR}/src/app/main.c
         ${APP_FILES}
         ${LIBRARY_FILES}
         ${DEPENDENCY_FILES}
         ${LINENOISE_FILES}
         ${DUKTAPE_FILES}
         )
+
+add_executable(mh_script
+        ${CMAKE_SOURCE_DIR}/src/app/script-main.c
+        ${APP_FILES}
+        ${LIBRARY_FILES}
+        ${DEPENDENCY_FILES}
+        ${LINENOISE_FILES}
+        ${DUKTAPE_FILES}
+        )
+
 
 add_subdirectory(tests)
 

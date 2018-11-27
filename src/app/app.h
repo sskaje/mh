@@ -31,6 +31,8 @@
 #ifndef MH_APP_H
 #define MH_APP_H
 
+#define MH_APP_VERSION "0.2.0"
+
 #include "config.h"
 
 #include <stdio.h>
@@ -55,8 +57,11 @@ typedef struct
     struct result_head results;
     size_t             result_count;
     size_t             query_size;
+    struct result_entry *result_ptr;
 
 } MHContext;
+
+static MHContext *mh_global_context = NULL;
 
 MHContext *MH_new();
 

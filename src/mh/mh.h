@@ -57,6 +57,8 @@
 #include "search.h"
 #include "utils.h"
 
+#define MH_VERSION "0.1.0"
+
 
 typedef struct {
     pid_t process_id;

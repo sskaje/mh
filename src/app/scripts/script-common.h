@@ -1,5 +1,5 @@
 /**
- * src/app/context.c -- mh_cli app context functions
+ * src/app/scripts/script-common.h -- JavaScript API private header
  *
  * @author sskaje
  * @license MIT
@@ -28,44 +28,17 @@
  * ------------------------------------------------------------------------
  */
 
-#include "app.h"
 
-MHContext *MH_new()
-{
-    MHContext *context = malloc(sizeof(MHContext));
-    context->process_id   = 0;
-    context->result_count = 0;
-    context->query_size   = 16;
-    context->result_ptr   = NULL;
+#ifndef MH_SCRIPT_COMMON_H
+#define MH_SCRIPT_COMMON_H
 
-    mh_result_init(&context->results);
+#include <app/app.h>
+#include "../scripts.h"
 
-    return context;
-}
+MHContext * script_get_global_mh_context();
 
-int MH_free(MHContext *context)
-{
-    if (context->result_count) {
-        mh_result_free(&context->results);
+#define MHOBJ_HIDDEN_SYMBOL_CONTEXT "mhctx"
 
-        context->result_count = 0;
-        context->query_size   = 16;
-    }
+MHContext * script_get_object_mh_context(duk_context *ctx);
 
-    free(context);
-
-    return 0;
-}
-
-int MHSaveGlobalContext(MHContext *context)
-{
-    mh_global_context = context;
-    return 0;
-}
-
-MHContext *MHGetGlobalContext()
-{
-    return mh_global_context;
-}
-
-// EOF
+#endif //MH_SCRIPT_COMMON_H
