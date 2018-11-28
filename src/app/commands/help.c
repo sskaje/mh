@@ -33,7 +33,7 @@
 void cmd_help()
 {
     printf(
-         "MH: Memory Hacker v" MH_APP_VERSION "\n"
+         "MH: A Scriptable Memory Editor v" MH_APP_VERSION "\n"
          "Author: sskaje\n\n"
          "Command                                 Description\n"
          " process-list                            Print process list\n"

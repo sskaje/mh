@@ -1,11 +1,11 @@
 # MH
-A Memory Editor for iOS/OSX with JavaScript support
+A memory editor for iOS/macOS with JavaScript support
 
 ## Requirement
 
 * mac OS / Mac OSX
 * Xcode
-* jailbroken iDevice if you want to try iOS versions
+* Jailbroken iDevice if you want to try iOS versions
 * [linenoise](https://github.com/antirez/linenoise.git) for interactive cli tool
 * [duktape](https://github.com/svaarala/duktape) for JavaScript support
 
@@ -46,17 +46,19 @@ $ bash build/build-ios-armv64-electra.sh
 $ sudo ./mh_cli
 ```
 
-For iOS 11.x by Electra, binary must locates /bin/mh_cli
-
-Read more: [Run HelloWorld on Jailbroken iOS 11](https://sskaje.me/2018/03/run-helloworld-on-jailbroken-ios-11/)
-
+>
+> For iOS 11.x by Electra, binary must locates /bin/mh_cli
+>
+> Read more: [Run HelloWorld on Jailbroken iOS 11](https://sskaje.me/2018/03/run-helloworld-on-jailbroken-ios-11/)
+>
 
 ## Documentation
 
 ### CLI Commands
 
 ```
-=== Memory Hacker ===
+
+MH: A Scriptable Memory Editor v0.2.0
 Author: sskaje
 
 Command                                 Description
@@ -65,23 +67,24 @@ Command                                 Description
  close                                   Close current task
  search-hex HEX                          Search HEX bytes, like search-hex 1a2b3c4d
  update-search-hex HEX                   Search HEX from previous result
- search-string STRING                    Search string, like search-string hello
- update-search-string STRING             Search string from previous result
+ search-string STR                       Search string, like search-string hello
+ update-search-string STR                Search string from previous result
  memory-read ADDRESS SIZE                Read memory data at ADDRESS, both ADDRESS and SIZE are in HEX
  memory-write ADDRESS STR                Write data to ADDRESS, ADDRESS in HEX, STR in BYTES
- memory-write-hex ADDRESS HEXSTR         Write hex data to ADDRESS, both ADDRESS and HEXSTR are in HEX
+ memory-write-hex ADDRESS HEX            Write hex data to ADDRESS, both ADDRESS and HEXSTR are in HEX
  result                                  Print result list, last round by default
+ script-run path/to/file.js              Run script file
  dyld                                    Print dyld info
  vm-region                               Print mach_vm_region()
- bytes2hex STRING                        Bytes to hex string
- hex2bytes HEXSTR                        Hex string to bytes
+ bytes2hex STR                           Bytes to hex string
+ hex2bytes HEX                           Hex string to bytes
  float2hex FLOAT                         Float number to hex
  double2hex DOUBLE                       Double number to hex
  int2hex INTEGER                         Integer to hex
  clear                                   Clear screen
  help                                    Print this message
- 
- ```
+
+```
 
 Example:
 ```
@@ -117,13 +120,28 @@ MH[379] > result
   000000008516f820  00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00  ................
 ```
 
+### Script Commands
+
+```
+mh_script path/to/script.js [args [...]]
+```
+
+You can use **mh_script** for non-interactive scenario.
+
+But a script written for *mh_cli* cannot be used by **mh_script**, because they are using different context scopes.
+
+More specifically, you can use MH class from *mh_cli*, but you can't use *#^mh_(search|result|memory)_#* functions from *mh_script*.
+
+Other mach/dyld related methods are not introduced to MH class, only open()/close(), I'm finding a way to get forked pids, so that forked children can be open in script easily.
+
 
 ### JavaScript API
 
 See [docs/define.js](https://github.com/sskaje/mh/blob/master/docs/define.js)
 
 Example:
-  [tests/test-script.js](https://github.com/sskaje/mh/blob/master/tests/test-script.js)
+- [tests/test-script.js](https://github.com/sskaje/mh/blob/master/tests/test-script.js)
+- [tests/test-script-object.js](https://github.com/sskaje/mh/blob/master/tests/test-script-object.js)
 
 
 ## Known issues
