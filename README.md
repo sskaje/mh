@@ -54,10 +54,10 @@ $ sudo ./mh_cli
 
 ## Documentation
 
-### CLI Commands
+### Interactive CLI Command
 
 ```
-
+# mh_cli -h
 MH: A Scriptable Memory Editor v0.2.0
 Author: sskaje
 
@@ -120,7 +120,7 @@ MH[379] > result
   000000008516f820  00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00  ................
 ```
 
-### Script Commands
+### Non-interactive Script Host
 
 ```
 mh_script path/to/script.js [args [...]]
