@@ -51,5 +51,8 @@ function test(pid) {
 
 }
 
+// global variable args;
+console.log(args);
+
 test(20655);
 

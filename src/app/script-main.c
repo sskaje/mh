@@ -31,6 +31,7 @@
 
 #include "app.h"
 
+#include "scripts.h"
 
 int main(int argc, char **argv) {
     if (argc < 2) {
@@ -54,8 +55,28 @@ int main(int argc, char **argv) {
 #endif
 
 #if JAVASCRIPT_SUPPORT
-    // todo: push args to js
-    cmd_script_run(NULL, argv[1]);
+
+    duk_context *ctx = script_new();
+
+    // register argv to args
+    duk_idx_t arr_idx;
+    arr_idx = duk_push_array(ctx);
+    for (int i = 1; i < argc; i++) {
+        duk_push_string(ctx, argv[i]);
+        duk_put_prop_index(ctx, arr_idx, (duk_uarridx_t) (i - 1));
+    }
+    duk_put_global_string(ctx, "args");
+
+    // run script
+    script_load(ctx, argv[1]);
+    if (duk_peval(ctx) == 0) {
+        duk_pop(ctx);/* ignore result */
+    } else {
+        printf("Error running: %s\n", duk_safe_to_string(ctx, -1));
+    }
+
+    script_free(ctx);
+
 #else
     printf("JAVASCRIPT not supported. Please run duktape_prepare.sh under tools.\n");
 #endif //JAVASCRIPT_SUPPORT

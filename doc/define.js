@@ -278,3 +278,10 @@ MH.prototype.result_remove = function (address) {
     return true;
 };
 
+/**
+ * global input variables
+ * copied from c argc/argv
+ *
+ * @type {Array}
+ */
+var args = [];
