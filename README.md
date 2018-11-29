@@ -137,7 +137,7 @@ Other mach/dyld related methods are not introduced to MH class, only open()/clos
 
 ### JavaScript API
 
-See [docs/define.js](https://github.com/sskaje/mh/blob/master/docs/define.js)
+See [doc/define.js](https://github.com/sskaje/mh/blob/master/doc/define.js)
 
 Example:
 - [tests/test-script.js](https://github.com/sskaje/mh/blob/master/tests/test-script.js)
