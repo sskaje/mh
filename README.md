@@ -3,7 +3,7 @@ A memory editor for iOS/macOS with JavaScript support
 
 ## Requirement
 
-* mac OS / Mac OSX
+* macOS
 * Xcode
 * Jailbroken iDevice if you want to try iOS versions
 * [linenoise](https://github.com/antirez/linenoise.git) for interactive cli tool
@@ -15,7 +15,7 @@ A memory editor for iOS/macOS with JavaScript support
 ### Prepare
 
 ```bash
-$ git clone https://github.com/sskaje/mh
+$ git clone https://github.com/sskaje/mh.git
 $ cd mh
 # prepare linenoise
 $ git submodule update --init --recursive
@@ -26,8 +26,9 @@ $ bash tools/duktape_prepare.sh
 ```
 
 ### Build
+
 ```bash
-# Build for OSX
+# Build for macOS
 $ bash build/build-osx.sh
 # Build for ARMv7 iDevices
 $ bash build/build-ios-armv7.sh
@@ -150,11 +151,12 @@ Example:
 
 ## License
 
-[MH: MIT](https://github.com/sskaje/mh/blob/master/LICENSE)
+MH is available under the MIT license. See the LICENSE file for more info.
 
-[linenoise](https://github.com/antirez/linenoise/blob/master/LICENSE)
+- [linenoise](https://github.com/antirez/linenoise/blob/master/LICENSE)
+- [duktape](https://github.com/svaarala/duktape/blob/master/LICENSE.txt)
 
-[duktape](https://github.com/svaarala/duktape/blob/master/LICENSE.txt)
+if you're using mh for iOS 11 jailbroken by Electra:
 
-[Cydia](https://github.com/ElectraJailbreak/cydia/blob/master/COPYING) if you're using mh for iOS 11 jailbroken by Electra.
+- [Cydia](https://github.com/ElectraJailbreak/cydia/blob/master/COPYING) 
 

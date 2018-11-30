@@ -1,5 +1,10 @@
 build/ios-*
-build/osx
+build/mac
+build/layout/bin/mh_*
+build/layout/usr/share/mh/scripts/*
+build/*.deb
+duktape-tmp-checkout
+
 cmake-build-debug
 .idea
 deps/duktape
