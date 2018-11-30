@@ -1,0 +1,12 @@
+Package: me.sskaje.mh
+Name: MH
+Version: 0.2-1
+Architecture: iphoneos-arm
+Description: An interactive memory hacker.
+Homepage: https://sskaje.me/2018/03/mh-cli-based-memory-editor-ios-macos/
+Maintainer: i_82 <i.82@me.com>
+Author: sskaje <sskaje@gmail.com>
+Sponsor: sskaje <https://sskaje.me/>
+Section: Utilities
+Tag: purpose::console, role::hacker
+

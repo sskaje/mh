@@ -4,11 +4,11 @@ CWD=$(pwd)
 
 BUILD_ROOT=$(dirname $(realpath $0))
 BUILD_ROOT=$BUILD_ROOT/ios-armv7s
-SDK_ROOT=$(realpath $BUILD_ROOT/../../SDKs)
 
 rm -rf "$BUILD_ROOT"
-
 mkdir $BUILD_ROOT
+
+SDK_ROOT=$(realpath $BUILD_ROOT/../../SDKs)
 
 cd $BUILD_ROOT
 

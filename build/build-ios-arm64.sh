@@ -4,15 +4,15 @@ CWD=$(pwd)
 
 BUILD_ROOT=$(dirname $(realpath $0))
 BUILD_ROOT=$BUILD_ROOT/ios-arm64
-SDK_ROOT=$(realpath $BUILD_ROOT/../../SDKs)
 
 rm -rf "$BUILD_ROOT"
-
 mkdir $BUILD_ROOT
+
+SDK_ROOT=$(realpath $BUILD_ROOT/../../SDKs)
 
 cd $BUILD_ROOT
 
-cmake -D BUILD_ARCH=arm64 -D LOCAL_SDK_ROOT="${SDK_ROOT}" ../../
+cmake -D BUILD_ARCH=arm64 -D LOCAL_SDK_ROOT="${SDK_ROOT}" -D IOS_JAILBREAK_ELECTRA=1 ../../
 
 make -j 8
 
