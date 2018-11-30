@@ -36,8 +36,8 @@ $ bash build/build-ios-armv7.sh
 $ bash build/build-ios-armv7s.sh
 # Build for ARM64 iDevices, iOS 10.2
 $ bash build/build-ios-armv64.sh
-# Build for ARM64 iDevices, iOS 11.x by Electra
-$ bash build/build-ios-armv64-electra.sh
+# Build for deb package for all iOS device
+$ bash build/build-ios-deb.sh
 
 ```
 
