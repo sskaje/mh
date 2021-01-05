@@ -8,11 +8,21 @@ A memory editor for iOS/macOS with JavaScript support
 * Jailbroken iDevice if you want to try iOS versions
 * [linenoise](https://github.com/antirez/linenoise.git) for interactive cli tool
 * [duktape](https://github.com/svaarala/duktape) for JavaScript support
+* python2 + PyYAML (required by duktape)
+* realpath 
+* cmake
+* wget
 
 
 ## Build & Run
 
 ### Prepare
+
+```bash
+brew install coreutils cmake wget 
+sudo easy_install install pip
+sudo pip install PyYAML
+```
 
 ```bash
 $ git clone https://github.com/sskaje/mh.git
